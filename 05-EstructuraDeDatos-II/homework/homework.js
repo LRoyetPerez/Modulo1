@@ -19,16 +19,16 @@ function LinkedList() {
     this.next = null;
   }
   
-  LinkedList.prototype.add = function(value){//5, 7, 2
+  LinkedList.prototype.add = function(value){
   let node = new Node(value);
   let current = this.head;
   
   if(!this.head){ 
     this.head = node;
-    return this.head;
+    return node;
   }
   
-  while(current.next){//Si next no es null
+  while(current.next){//Mientras current next no es null 
     current = current.next;
   }
   
