@@ -56,13 +56,51 @@ BinarySearchTree.prototype.size = function () {
 }
 
 
-BinarySearchTree.prototype.contains = function () {
+BinarySearchTree.prototype.contains = function (value) {
+   if (this.root === value) return true;
+   if (this.left && this.left.contains(value)) return true; // si tengo this.left preguntale que si tiene eso y retorne true;  se cumple la primera y se guarda la segunda 
+   if (this.right && this.right.contains(value)) return true;
+   return false;
 
 }
-BinarySearchTree.prototype.depthFirstForEach = function () {
+BinarySearchTree.prototype.depthFirstForEach = function (cb, order) {
+   switch (order) {
+      // Post-order Iz- Der- Nd
+      case "post-order":
+         this.left && this.left.depthFirstForEach(cb, order);
+         this.right && this.right.depthFirstForEach(cb, order);
+         cb(this.root);
+         break;
+
+      // Pre-order Nd- Iz- Der
+      case "pre-order":
+         cb(this.root);
+         this.left && this.left.depthFirstForEach(cb, order);
+         this.right && this.right.depthFirstForEach(cb, order);
+
+         break;
+
+
+      //In Order Iz- Nd- Der
+      default:
+         this.left && this.left.depthFirstForEach(cb, order);
+         cb(this.root);
+         this.right && this.right.depthFirstForEach(cb, order);
+         break;
+   }
 
 }
-BinarySearchTree.prototype.breadthFirstForEach = function () {
+BinarySearchTree.prototype.breadthFirstForEach = function (cb , pendiente) {
+   if (!pendiente) {
+      var pendiente = [];
+   }
+   cb(this.value);
+   this.left && pendiente.push(this.left);
+   this.right && pendiente.push(this.right);
+
+   if (pendiente.length) {
+      pendiente.push().breadthFirstForEach(cb, pendiente);
+   }
 
 }
 // No modifiquen nada debajo de esta linea
