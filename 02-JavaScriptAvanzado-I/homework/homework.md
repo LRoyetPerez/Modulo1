@@ -10,11 +10,11 @@ Determiná que será impreso en la consola, sin ejecutar el código.
 x = 1;
 var a = 5;
 var b = 10;
-var c = function (a, b, c) {
+var c = function (a, b, c) { // a= 8, b=9, c=10
    var x = 10;
-   console.log(x);
-   console.log(a);
-   var f = function (a, b, c) {
+   console.log(x); // 10
+   console.log(a);  // 8
+   var f = function (a, b, c) { 
       b = a;
       console.log(b);
       b = c;
