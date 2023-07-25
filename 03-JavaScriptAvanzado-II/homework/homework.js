@@ -13,7 +13,14 @@ nuevoContador()     // 2
 const otroContador = counter()
 otroContador()      // 1
 otroContador()      // 2 */
-function counter() {}
+function counter() {
+  var contador = 1;
+
+  return function () {
+    return contador++;
+
+  }
+}
 
 /* Ejercicio 2
 Tu tarea aquí es lograr, mediante un closure, que cacheFunction actúe como una memoria caché para el callback 
@@ -32,9 +39,24 @@ otra vez cálculos que ya se hicieron anteriormente.
 
   squareCache(5)    // invocará a square(5), almacenará el resultado y lo retornará
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) */
-
-function cacheFunction(cb) {}
-
+  
+  function square(n) {
+    return n * n;
+  }
+  
+  function cacheFunction(cb) {
+    var objeto = {};
+    return function (arg) {
+      if (objeto.hasOwnProperty(arg)) {
+        return objeto[arg];
+      } else {
+        objeto[arg] = cb(arg);
+        return objeto[arg];
+      }
+    }
+  }
+  var result = cacheFunction(square);
+  console.log(result(4));
 //----------------------------------------
 
 // Bind
@@ -58,8 +80,8 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor = getNombre.bind();
-let getNombreAlumno = getNombre.bind();
+let getNombreInstructor = getNombre.bind(instructor);
+let getNombreAlumno = getNombre.bind(alumno);
 
 /*
   Ejercicio 4
@@ -70,9 +92,9 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
     return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos = crearCadena.bind();
-let textoGuiones = crearCadena.bind();
-let textoUnderscore = crearCadena.bind();
+let textoAsteriscos = crearCadena.bind(this, "*", "*");
+let textoGuiones = crearCadena.bind(this, "-", "-");
+let textoUnderscore = crearCadena.bind(this, "_", "_");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
