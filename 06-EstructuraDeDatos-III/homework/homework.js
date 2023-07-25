@@ -13,26 +13,58 @@
    dentro del directorio homework.
 */
 function BinarySearchTree() {
-   this.root=value; 
-   this.left= null; 
-   this.rigth=null; 
+   this.root = value;
+   this.left = null;
+   this.rigth = null;
 }
-BinarySearchTree.prototype.insert=function(value){
+BinarySearchTree.prototype.insert = function (value) {
+   var nodo = new BinarySearchTree(value);
 
+   if (value < this.root) {
+      if (this.left === null) {
+         this.left = nodo;
+         return value;
+      }
+      else {
+         return this.left.insert(value);
+      }
+   }
+
+   else {
+      if (this.rigth === null) {
+         this.rigth = nodo;
+         return value;
+      }
+      else {
+         return this.rigth.insert(value);
+      }
+   }
 }
 
-BinarySearchTree.prototype.size=function(){
-   }
 
-   BinarySearchTree.prototype.contains=function(){
+//size: retorna la cantidad total de nodos del árbol
 
+BinarySearchTree.prototype.size = function () {
+   var contador = 1; 
+   if(this.left!== null){
+      contador=contador + this.left.size(); 
    }
-   BinarySearchTree.prototype.depthFirstForEach=function(){
+   if(this.rigth!==null){
+      contador = contador + this.rigth.size(); 
+   }
+   return contador; 
+}
 
-   }
-   BinarySearchTree.prototype.breadthFirstForEach=function(){
-      
-   }
+
+BinarySearchTree.prototype.contains = function () {
+
+}
+BinarySearchTree.prototype.depthFirstForEach = function () {
+
+}
+BinarySearchTree.prototype.breadthFirstForEach = function () {
+
+}
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
