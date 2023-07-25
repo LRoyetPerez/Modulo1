@@ -76,7 +76,7 @@ function LinkedList() {
       }
       current = current.next;
     }
-    return null;
+    return null; 
   }
 
 
