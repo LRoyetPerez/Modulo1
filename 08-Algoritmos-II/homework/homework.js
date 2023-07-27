@@ -6,7 +6,7 @@ function quickSort(array) {
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
   // Tu código:
-  if(array <=1 ) return array ; 
+  if(array.length <=1 ) return array ; 
    
   let pivote= array[0]; 
   let derecha= []; 
@@ -19,10 +19,8 @@ function quickSort(array) {
     else 
     derecha.push(array[i]); 
   }
-  let izquierdaRecu= quickSort (izquierda);
-  let derechaRecu= quickSort (derecha); 
-
-  return izquierdaRecu.concat(pivote).concat(derechaRecu); 
+  
+  return quickSort(izquierda).concat(pivote,quickSort(derecha)); 
 }
 console.log(quickSort([2,5,1,5,7,4,3])); 
 
